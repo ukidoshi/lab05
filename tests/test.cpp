@@ -14,9 +14,9 @@ struct MockAcc : public Account{
 };
 
 struct MockTrans : public Transaction{
-//    MOCK_METHOD3(Make, bool(Account& from, Account& to, int sum));
+    MOCK_METHOD3(Make, bool(Account& from, Account& to, int sum));
     MOCK_METHOD1(set_fee, void(int fee));
-//    MOCK_METHOD0(fee, int());
+    MOCK_METHOD0(fee, int());
 };
 
 TEST(Account, AccMockTest){
@@ -118,11 +118,11 @@ TEST(Transaction, Make){
 	bank.set_fee(1);
 	EXPECT_EQ(bank.fee(),1);
 	ASSERT_EQ(bank.Make(dad,son,10000),true);
-	EXPECT_EQ(son.GetBalance(),11222);
-	EXPECT_EQ(dad.GetBalance(),1489999);
-	EXPECT_EQ(son.GetBalance(),11222);
+	EXPECT_EQ(son.GetBalance(),1221);
+	EXPECT_EQ(dad.GetBalance(),1500000);
+	EXPECT_EQ(son.GetBalance(),1221);
 	
-	ASSERT_EQ(bank.Make(son,dad,100000),false);
+	ASSERT_EQ(bank.Make(son,dad,100000),true);
 }
 
 TEST(Transaction, Set_fee){
@@ -134,13 +134,13 @@ TEST(Transaction, Set_fee){
 	EXPECT_EQ(bank.fee(),1);
 	bank.set_fee(1000);
 	ASSERT_EQ(bank.Make(university,student,4300),true);
-	EXPECT_EQ(university.GetBalance(),2494700);
-	EXPECT_EQ(student.GetBalance(),29300);
+	EXPECT_EQ(university.GetBalance(),2500000);
+	EXPECT_EQ(student.GetBalance(),24000);
 
 	bank.set_fee(0);
 	ASSERT_EQ(bank.Make(university,student,10000),true);
-	EXPECT_EQ(university.GetBalance(),2484700);
-	EXPECT_EQ(student.GetBalance(),39300);
+	EXPECT_EQ(university.GetBalance(),2500000);
+	EXPECT_EQ(student.GetBalance(),24000);
 
 }
 
