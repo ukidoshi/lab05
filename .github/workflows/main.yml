@@ -16,6 +16,7 @@ jobs:
         - name: build banking
           shell: bash
           run: |
+            pwd
             cd banking
             cmake -H. -B_built
             cmake --build _built
